@@ -40,7 +40,7 @@ public class UserManagementController {
         return ResponseEntity.ok(usersManagementService.getUsersById(userId));
     }
 
-    @GetMapping("/admin/update/{userId}")
+    @PutMapping("/admin/update/{userId}")
     public ResponseEntity<RequestResponse> getUserById(@PathVariable Integer userId, @RequestBody Users requestResponse){
         return ResponseEntity.ok(usersManagementService.updateUser(userId, requestResponse));
     }
