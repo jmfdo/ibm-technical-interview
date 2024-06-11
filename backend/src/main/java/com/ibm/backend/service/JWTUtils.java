@@ -17,7 +17,7 @@ import java.util.function.Function;
 public class JWTUtils {
 
     private SecretKey Key;
-    private static final Long EXPIRATION_TIME = 86400000L;
+    private static final long EXPIRATION_TIME = 86400000;
 
     public JWTUtils() {
         String secretString = "CSfXNjZns3vAU8edBTYFnJGrExnRkurQ7UyeSTeVkTFWjKTcl7ZU9A88mLqzgH34KiC+OcSKtF8ruDWzV3WKQq2dVTxBv6NAERn1sEdaQ++yxZS75z6M+qpiJVaqpJqz9vZTsC4oyR4cc3GHD/7EjuvOyCezT+ENXrDRh3mLW1J29fX2JcBorwaqLJTEVJSkpv90G8ipeI3FTXM786UhsDQYLbYJ9s0v9ugxmQaaxYnxcAR0zS5gL3hPTJi5gKYVT4fAO8QLMHoZJ5u74CqMWtKeh9JA4vQCOsG6MvxU2syxhyemcyEzqqKF3hym53Tnpq8Ktt3kHPAbOLltjZV7Ig==";
