@@ -61,9 +61,10 @@ public class UsersManagementService {
             var user = usersRepo.findByEmail(loginRequest.getEmail()).orElseThrow();
             var jwt = jwtUtils.generateToken(user);
             var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), user);
-            response .setStatusCode(200);
+            response.setStatusCode(200);
             response.setToken(jwt);
             response.setRefreshToken(refreshToken);
+            response.setRole(String.valueOf(user.getRole()));
             response.setExpirationTime("24Hrs");
             response.setMessage("Successfully logged in");
         } catch (Exception e) {
@@ -113,7 +114,7 @@ public class UsersManagementService {
             return requestResponse;
         } catch (Exception e) {
             requestResponse.setStatusCode(500);
-            requestResponse.setMessage("Error ocurred: " + e.getMessage());
+            requestResponse.setMessage("Error occurred: " + e.getMessage());
             return requestResponse;
         }
     }
@@ -125,10 +126,10 @@ public class UsersManagementService {
             Users userById = usersRepo.findById(id).orElseThrow(()-> new RuntimeException("User not found"));
             requestResponse.setUsers(userById);
             requestResponse.setStatusCode(200);
-            requestResponse.setMessage("Users with id "+userById+" found successfully");
+            requestResponse.setMessage("User with id "+id+" found successfully");
         } catch (Exception e) {
             requestResponse.setStatusCode(500);
-            requestResponse.setMessage("Error occured: "+e.getMessage());
+            requestResponse.setMessage("Error occurred: "+e.getMessage());
         }
         return requestResponse;
     }
@@ -148,7 +149,7 @@ public class UsersManagementService {
             }
         } catch (Exception e) {
             requestResponse.setStatusCode(500);
-            requestResponse.setMessage("Error occurred whiledeleting user: " + e.getMessage());
+            requestResponse.setMessage("Error occurred while deleting user: " + e.getMessage());
         }
         return requestResponse;
     }
