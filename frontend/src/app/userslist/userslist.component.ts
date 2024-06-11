@@ -13,6 +13,7 @@ export class UserslistComponent implements OnInit {
 
   users: any[] = []
   errorMessage = ''
+  profileId: any
 
   constructor (private readonly userService: UserService, private readonly router: Router) {
 
@@ -26,7 +27,8 @@ export class UserslistComponent implements OnInit {
     try {
       const token: any = localStorage.getItem('token')
       const response = await this.userService.getAllUsers(token)
-
+      this.profileId =await this.userService.getYourProfile(token)
+      
       if (response && response.statusCode === 200 && response.usersList) {
         this.users = response.usersList
       } else {

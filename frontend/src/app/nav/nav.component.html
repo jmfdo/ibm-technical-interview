@@ -1,16 +1,15 @@
 <nav>
   <ul>
     @if (!isAuthenticated) {
-      <li><a routerLink = "/login">jmfdo</a></li>
+      <li>jmfdo</li>
     }
     @if (isAuthenticated) {
-      <li><a routerLink = "/profile">profile</a></li>
+      <li><a routerLink = "/profile">Profile</a></li>
     }
     @if (isAdmin) {
       <li><a routerLink = "/users">Users Management</a></li>
     }
     @if (isAuthenticated) {
-      <li><a routerLink = "/login">Login</a></li>
       <li><a routerLink = ""(click)="logout()">Logout</a></li>
     }
   </ul>

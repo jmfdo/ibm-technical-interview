@@ -1,6 +1,6 @@
 package com.ibm.backend.service;
 
-import com.ibm.backend.dto.RequestResponse;
+import com.ibm.backend.dto.UserReqRes;
 import com.ibm.backend.entity.Users;
 import com.ibm.backend.enums.UserRole;
 import com.ibm.backend.repository.UsersRepo;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsersManagementService {
+public class UsersService {
 
     @Autowired
     private UsersRepo usersRepo;
@@ -29,8 +29,8 @@ public class UsersManagementService {
     @Autowired
      private PasswordEncoder passwordEncoder;
 
-    public RequestResponse register(RequestResponse registrationRequest){
-        RequestResponse response = new RequestResponse();
+    public UserReqRes register(UserReqRes registrationRequest){
+        UserReqRes response = new UserReqRes();
 
         try {
             Users user = new Users();
@@ -53,8 +53,8 @@ public class UsersManagementService {
         return response;
     }
 
-    public RequestResponse login(RequestResponse loginRequest) {
-        RequestResponse response = new RequestResponse();
+    public UserReqRes login(UserReqRes loginRequest) {
+        UserReqRes response = new UserReqRes();
         try {
             authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
@@ -74,8 +74,8 @@ public class UsersManagementService {
         return response;
     }
 
-    public RequestResponse refreshToken(RequestResponse refreshTokenRequest) {
-        RequestResponse response = new RequestResponse();
+    public UserReqRes refreshToken(UserReqRes refreshTokenRequest) {
+        UserReqRes response = new UserReqRes();
 
         try {
             String ourEmail = jwtUtils.extractUsername(refreshTokenRequest.getToken());
@@ -98,64 +98,64 @@ public class UsersManagementService {
         }
     }
 
-    public RequestResponse getAllUsers(){
-        RequestResponse requestResponse = new RequestResponse();
+    public UserReqRes getAllUsers(){
+        UserReqRes response = new UserReqRes();
 
         try{
             List<Users> result = usersRepo.findAll();
             if (!result.isEmpty()) {
-                requestResponse.setUsersList(result);
-                requestResponse.setStatusCode(200);
-                requestResponse.setMessage("Successful");
+                response.setUsersList(result);
+                response.setStatusCode(200);
+                response.setMessage("Successful");
             }else {
-                requestResponse.setStatusCode(404);
-                requestResponse.setMessage("No users found");
+                response.setStatusCode(404);
+                response.setMessage("No users found");
             }
-            return requestResponse;
+            return response;
         } catch (Exception e) {
-            requestResponse.setStatusCode(500);
-            requestResponse.setMessage("Error occurred: " + e.getMessage());
-            return requestResponse;
+            response.setStatusCode(500);
+            response.setMessage("Error occurred: " + e.getMessage());
+            return response;
         }
     }
 
-    public RequestResponse getUsersById(Integer id) {
-        RequestResponse requestResponse = new RequestResponse();
+    public UserReqRes getUsersById(Integer id) {
+        UserReqRes response = new UserReqRes();
 
         try {
             Users userById = usersRepo.findById(id).orElseThrow(()-> new RuntimeException("User not found"));
-            requestResponse.setUsers(userById);
-            requestResponse.setStatusCode(200);
-            requestResponse.setMessage("User with id "+id+" found successfully");
+            response.setUsers(userById);
+            response.setStatusCode(200);
+            response.setMessage("User with id "+id+" found successfully");
         } catch (Exception e) {
-            requestResponse.setStatusCode(500);
-            requestResponse.setMessage("Error occurred: "+e.getMessage());
+            response.setStatusCode(500);
+            response.setMessage("Error occurred: "+e.getMessage());
         }
-        return requestResponse;
+        return response;
     }
 
-    public RequestResponse deleteUser(Integer userId) {
-        RequestResponse requestResponse = new RequestResponse();
+    public UserReqRes deleteUser(Integer userId) {
+        UserReqRes response = new UserReqRes();
 
         try {
             Optional<Users> userOptional = usersRepo.findById(userId);
             if (userOptional.isPresent()) {
                 usersRepo.deleteById(userId);
-                requestResponse.setStatusCode(200);
-                requestResponse.setMessage("User deleted successfully");
+                response.setStatusCode(200);
+                response.setMessage("User deleted successfully");
             } else {
-                requestResponse.setStatusCode(404);
-                requestResponse.setMessage("User not found for deletion");
+                response.setStatusCode(404);
+                response.setMessage("User not found for deletion");
             }
         } catch (Exception e) {
-            requestResponse.setStatusCode(500);
-            requestResponse.setMessage("Error occurred while deleting user: " + e.getMessage());
+            response.setStatusCode(500);
+            response.setMessage("Error occurred while deleting user: " + e.getMessage());
         }
-        return requestResponse;
+        return response;
     }
 
-    public RequestResponse updateUser(Integer userId, Users updateUser) {
-        RequestResponse requestResponse = new RequestResponse();
+    public UserReqRes updateUser(Integer userId, Users updateUser) {
+        UserReqRes response = new UserReqRes();
 
         try {
             Optional<Users> userOptional = usersRepo.findById(userId);
@@ -171,34 +171,34 @@ public class UsersManagementService {
                 }
 
                 Users savedUser = usersRepo.save(existingUser);
-                requestResponse.setUsers(savedUser);
-                requestResponse.setStatusCode(200);
-                requestResponse.setMessage("User updated successfully");
+                response.setUsers(savedUser);
+                response.setStatusCode(200);
+                response.setMessage("User updated successfully");
             }
         } catch (Exception e){
-            requestResponse.setStatusCode(500);
-            requestResponse.setMessage("Error occurred while updating the user: "+e.getMessage());
+            response.setStatusCode(500);
+            response.setMessage("Error occurred while updating the user: "+e.getMessage());
         }
-        return requestResponse;
+        return response;
     }
 
-    public RequestResponse getMyInfo(String email) {
-        RequestResponse requestResponse = new RequestResponse();
+    public UserReqRes getMyInfo(String email) {
+        UserReqRes response = new UserReqRes();
          try {
              Optional<Users> userOptional = usersRepo.findByEmail(email);
 
              if (userOptional.isPresent()) {
-                 requestResponse.setUsers(userOptional.get());
-                 requestResponse.setStatusCode(200);
-                 requestResponse.setMessage("Successful");
+                 response.setUsers(userOptional.get());
+                 response.setStatusCode(200);
+                 response.setMessage("Successful");
              } else {
-                 requestResponse.setStatusCode(404);
-                 requestResponse.setMessage("User not found for update");
+                 response.setStatusCode(404);
+                 response.setMessage("User not found for update");
              }
          } catch (Exception e) {
-             requestResponse.setStatusCode(500);
-             requestResponse.setMessage("Error occurred while getting the user info: "+e.getMessage());
+             response.setStatusCode(500);
+             response.setMessage("Error occurred while getting the user info: "+e.getMessage());
          }
-         return requestResponse;
+         return response;
     }
 }

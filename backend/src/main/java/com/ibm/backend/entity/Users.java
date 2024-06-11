@@ -20,6 +20,9 @@ public class Users implements UserDetails {
     @Column(name="id", updatable = false, nullable = false)
     private Integer id;
 
+    @OneToMany(mappedBy = "users")
+    List<Rents> rentsList;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRole role;

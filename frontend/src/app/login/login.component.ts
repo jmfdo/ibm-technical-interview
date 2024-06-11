@@ -22,7 +22,7 @@ export class LoginComponent {
 
   async handleSubmit() {
     if (!this.email || !this.password) {
-      this.errorMessage = "Email and password required"
+      this.showError("Email and password required")
       return
     }
 
@@ -31,7 +31,7 @@ export class LoginComponent {
       if (response.statusCode === 200) {
         localStorage.setItem('token', response.token)
         localStorage.setItem('role', response.role)
-        this.router.navigate(['/profile'])
+        this.router.navigate(['/users'])
       } else {
         this.showError(response.message)
       }

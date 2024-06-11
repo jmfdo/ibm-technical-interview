@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.util.List;
+
 @Entity
 @Table(name="devices")
 @Data
@@ -14,6 +16,9 @@ public class Devices {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", updatable = false, nullable = false)
     private Integer id;
+
+    @OneToMany(mappedBy = "devices")
+    List<Rents> rentsList;
 
     @Column(nullable = false)
     private String name;
