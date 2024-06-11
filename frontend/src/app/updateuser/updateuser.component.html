@@ -1,0 +1,22 @@
+<div class="container">
+  @if (errorMessage) {
+    <p class="error-message">{{ errorMessage }}</p>
+  }
+  
+  <h2>Update User</h2>
+  <form (submit)="updateUser()">
+    <div>
+      <label for="">Name:</label>
+      <input type="text" [(ngModel)]="userData.name" name="name">
+    </div>
+    <div>
+      <label for="">Email:</label>
+      <input type="email" [(ngModel)]="userData.email" name="email">
+    </div>
+    <div>
+      <label for="">Role:</label>
+      <input type="email" [(ngModel)]="userData.email" name="email">
+    </div>
+    <button type="submit">Login</button>
+  </form>
+</div>
