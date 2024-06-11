@@ -2,7 +2,6 @@ package com.ibm.backend.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.ibm.backend.entity.Clients;
 import com.ibm.backend.entity.Devices;
 import com.ibm.backend.enums.DeviceType;
 import lombok.Data;

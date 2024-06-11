@@ -30,4 +30,8 @@ public class Devices {
     @Column(nullable = false)
     @ColumnDefault("0")
     private int amount;
+
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private int timesRequested;
 }

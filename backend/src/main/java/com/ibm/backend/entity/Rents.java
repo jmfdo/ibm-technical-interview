@@ -1,5 +1,6 @@
 package com.ibm.backend.entity;
 
+import com.ibm.backend.enums.RentState;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -32,6 +33,10 @@ public class Rents {
 
     @Column(nullable = false)
     private int clientId;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private RentState rentState;
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
