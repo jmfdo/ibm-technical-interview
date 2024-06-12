@@ -3,8 +3,9 @@ package com.ibm.backend.entity;
 import com.ibm.backend.enums.RentState;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "rents")
@@ -20,19 +21,22 @@ public class Rents {
     private int deviceId;
 
     @ManyToOne()
-    @JoinColumn(name = "rent_user")
+    @JoinColumn(name = "rent_user", nullable = false)
     Users users;
 
     @ManyToOne()
-    @JoinColumn(name = "rent_client")
+    @JoinColumn(name = "rent_client", nullable = false)
     Clients clients;
 
     @ManyToOne()
-    @JoinColumn(name = "rent_device")
+    @JoinColumn(name = "rent_device", nullable = false)
     Devices devices;
 
     @Column(nullable = false)
     private int clientId;
+
+    @Column(nullable = false)
+    private int userId;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -40,10 +44,10 @@ public class Rents {
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date rentDate;
+    private LocalDate rentDate;
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date expDate;
+    private LocalDate expDate;
 
 }

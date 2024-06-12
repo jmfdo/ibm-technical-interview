@@ -1,6 +1,7 @@
 package com.ibm.backend.service;
 
-import com.ibm.backend.dto.DeviceReqRes;
+import com.ibm.backend.dto.CustomDeviceDTO;
+import com.ibm.backend.dto.DeviceDTO;
 import com.ibm.backend.entity.Devices;
 import com.ibm.backend.repository.DevicesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,17 @@ public class DevicesService {
     @Autowired
     private DevicesRepo devicesRepo;
 
-    public DeviceReqRes getAllDevices () {
-        DeviceReqRes response = new DeviceReqRes();
+    @Autowired
+    private DTOConversionService dtoConversionService;
+
+    public DeviceDTO getAllDevices () {
+        DeviceDTO response = new DeviceDTO();
 
         try {
             List<Devices> result = devicesRepo.findAll();
+            List<CustomDeviceDTO> resultList = dtoConversionService.convertToDeviceDTOs(result);
             if (!result.isEmpty()) {
-                response.setDevicesList(result);
+                response.setDevices(resultList);
                 response.setStatusCode(200);
                 response.setMessage("Successful");
             } else {
@@ -36,8 +41,8 @@ public class DevicesService {
         }
     }
 
-    public DeviceReqRes addDevice (DeviceReqRes addDeviceRequest) {
-        DeviceReqRes response = new DeviceReqRes();
+    public DeviceDTO addDevice (CustomDeviceDTO addDeviceRequest) {
+        DeviceDTO response = new DeviceDTO();
 
         try {
             Devices device = new Devices();
@@ -46,8 +51,8 @@ public class DevicesService {
             device.setAmount(addDeviceRequest.getAmount());
             Devices devicesResult = devicesRepo.save(device);
 
+
             if(devicesResult.getId()>0){
-                response.setDevices(devicesResult);
                 response.setMessage("Device saved successfully");
                 response.setStatusCode(200);
             }
@@ -58,8 +63,8 @@ public class DevicesService {
         return response;
     }
 
-    public DeviceReqRes deleteDevice (Integer deviceId) {
-        DeviceReqRes response = new DeviceReqRes();
+    public DeviceDTO deleteDevice (Integer deviceId) {
+        DeviceDTO response = new DeviceDTO();
 
         try {
             Optional<Devices> deviceOptional = devicesRepo.findById(deviceId);

@@ -18,7 +18,7 @@ public class Devices {
     private Integer id;
 
     @OneToMany(mappedBy = "devices")
-    List<Rents> rentsList;
+    List<Rents> rents;
 
     @Column(nullable = false)
     private String name;
@@ -34,4 +34,9 @@ public class Devices {
     @Column(nullable = false)
     @ColumnDefault("0")
     private int timesRequested;
+
+    public void addRent(Rents rent) {
+        rents.add(rent);
+        rent.setDevices(this);
+    }
 }

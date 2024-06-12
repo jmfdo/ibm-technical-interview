@@ -21,7 +21,7 @@ public class Users implements UserDetails {
     private Integer id;
 
     @OneToMany(mappedBy = "users")
-    List<Rents> rentsList;
+    List<Rents> rents;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -35,6 +35,11 @@ public class Users implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
+    public void addRent(Rents rent) {
+        rents.add(rent);
+        rent.setUsers(this);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

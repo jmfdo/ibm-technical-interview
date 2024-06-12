@@ -2,28 +2,24 @@ package com.ibm.backend.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.ibm.backend.entity.Rents;
 import com.ibm.backend.enums.RentState;
 import lombok.Data;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RentReqRes {
+public class CustomRentDTO {
 
-    private int statusCode;
-    private String message;
-    private String error;
     private int id;
     private int deviceId;
+    private String deviceName;
     private int userId;
+    private String rentedBy;
     private int clientId;
-    private Date rentDate;
-    private Date expDate;
+    private String rentedTo;
+    private LocalDate rentDate;
+    private LocalDate expDate;
     private RentState rentState;
-    private Rents devices;
-    private List<Rents> rentsList;
 }

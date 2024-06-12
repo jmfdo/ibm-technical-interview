@@ -1,6 +1,7 @@
 package com.ibm.backend.controller;
 
-import com.ibm.backend.dto.ClientReqRes;
+import com.ibm.backend.dto.ClientDTO;
+import com.ibm.backend.dto.CustomClientDTO;
 import com.ibm.backend.service.ClientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +14,17 @@ public class ClientController {
     private ClientsService clientsService;
 
     @GetMapping("/adminuser/get-all-clients")
-    public ResponseEntity<ClientReqRes> getAllClients () {
+    public ResponseEntity<ClientDTO> getAllClients () {
         return ResponseEntity.ok(clientsService.getAllClients());
     }
 
     @PostMapping("/adminuser/add-client")
-    public ResponseEntity<ClientReqRes> addClient(@RequestBody ClientReqRes request) {
+    public ResponseEntity<ClientDTO> addClient(@RequestBody CustomClientDTO request) {
         return ResponseEntity.ok(clientsService.addClient(request));
     }
 
     @DeleteMapping("/adminuser/delete-client/{clientId}")
-    public ResponseEntity<ClientReqRes> deleteClient(@PathVariable Integer clientId) {
+    public ResponseEntity<ClientDTO> deleteClient(@PathVariable Integer clientId) {
         return ResponseEntity.ok(clientsService.deleteClient(clientId));
     }
 }

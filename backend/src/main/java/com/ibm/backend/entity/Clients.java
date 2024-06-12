@@ -12,16 +12,21 @@ import java.util.List;
 public class Clients {
 
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Integer id;
 
     @Column(nullable = false)
     private String name;
-
+    
     @Column(nullable = false)
     @ColumnDefault("0")
     private int timesRented;
 
     @OneToMany(mappedBy = "clients")
-    List<Rents> rentsList;
+    List<Rents> rents;
+
+    public void addRent(Rents rent) {
+        rents.add(rent);
+        rent.setClients(this);
+    }
 }

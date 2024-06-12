@@ -1,6 +1,7 @@
 package com.ibm.backend.service;
 
-import com.ibm.backend.dto.ClientReqRes;
+import com.ibm.backend.dto.ClientDTO;
+import com.ibm.backend.dto.CustomClientDTO;
 import com.ibm.backend.entity.Clients;
 import com.ibm.backend.repository.ClientsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,17 @@ public class ClientsService {
     @Autowired
     private ClientsRepo clientsRepo;
 
-    public ClientReqRes getAllClients () {
-        ClientReqRes response = new ClientReqRes();
+    @Autowired
+    private DTOConversionService dtoConversionService;
+
+    public ClientDTO getAllClients () {
+        ClientDTO response = new ClientDTO();
 
         try {
             List<Clients> result = clientsRepo.findAll();
+            List<CustomClientDTO> resultsList = dtoConversionService.convertToClientDTOs(result);
             if (!result.isEmpty()) {
-                response.setClientsList(result);
+                response.setClients(resultsList);
                 response.setStatusCode(200);
                 response.setMessage("Successful");
             } else {
@@ -36,8 +41,8 @@ public class ClientsService {
         }
     }
 
-    public ClientReqRes addClient (ClientReqRes addClientRequest) {
-        ClientReqRes response = new ClientReqRes();
+    public ClientDTO addClient (CustomClientDTO addClientRequest) {
+        ClientDTO response = new ClientDTO();
 
         try {
             Clients client = new Clients();
@@ -46,7 +51,6 @@ public class ClientsService {
             Clients clientsResult = clientsRepo.save(client);
 
             if(clientsResult.getId()>0){
-                response.setClients(clientsResult);
                 response.setMessage("Client saved successfully");
                 response.setStatusCode(200);
             }
@@ -57,8 +61,8 @@ public class ClientsService {
         return response;
     }
 
-    public ClientReqRes deleteClient(Integer clientId) {
-        ClientReqRes response = new ClientReqRes();
+    public ClientDTO deleteClient(Integer clientId) {
+        ClientDTO response = new ClientDTO();
 
         try {
             Optional<Clients> clientsOptional = clientsRepo.findById(clientId);

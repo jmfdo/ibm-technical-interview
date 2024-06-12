@@ -1,6 +1,6 @@
 package com.ibm.backend.service;
 
-import com.ibm.backend.dto.UserReqRes;
+import com.ibm.backend.dto.UserDTO;
 import com.ibm.backend.entity.Users;
 import com.ibm.backend.enums.UserRole;
 import com.ibm.backend.repository.UsersRepo;
@@ -29,8 +29,8 @@ public class UsersService {
     @Autowired
      private PasswordEncoder passwordEncoder;
 
-    public UserReqRes register(UserReqRes registrationRequest){
-        UserReqRes response = new UserReqRes();
+    public UserDTO register(UserDTO registrationRequest){
+        UserDTO response = new UserDTO();
 
         try {
             Users user = new Users();
@@ -53,8 +53,8 @@ public class UsersService {
         return response;
     }
 
-    public UserReqRes login(UserReqRes loginRequest) {
-        UserReqRes response = new UserReqRes();
+    public UserDTO login(UserDTO loginRequest) {
+        UserDTO response = new UserDTO();
         try {
             authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
@@ -74,8 +74,8 @@ public class UsersService {
         return response;
     }
 
-    public UserReqRes refreshToken(UserReqRes refreshTokenRequest) {
-        UserReqRes response = new UserReqRes();
+    public UserDTO refreshToken(UserDTO refreshTokenRequest) {
+        UserDTO response = new UserDTO();
 
         try {
             String ourEmail = jwtUtils.extractUsername(refreshTokenRequest.getToken());
@@ -98,8 +98,8 @@ public class UsersService {
         }
     }
 
-    public UserReqRes getAllUsers(){
-        UserReqRes response = new UserReqRes();
+    public UserDTO getAllUsers(){
+        UserDTO response = new UserDTO();
 
         try{
             List<Users> result = usersRepo.findAll();
@@ -107,7 +107,7 @@ public class UsersService {
                 response.setUsersList(result);
                 response.setStatusCode(200);
                 response.setMessage("Successful");
-            }else {
+            } else {
                 response.setStatusCode(404);
                 response.setMessage("No users found");
             }
@@ -119,8 +119,8 @@ public class UsersService {
         }
     }
 
-    public UserReqRes getUsersById(Integer id) {
-        UserReqRes response = new UserReqRes();
+    public UserDTO getUsersById(Integer id) {
+        UserDTO response = new UserDTO();
 
         try {
             Users userById = usersRepo.findById(id).orElseThrow(()-> new RuntimeException("User not found"));
@@ -134,8 +134,8 @@ public class UsersService {
         return response;
     }
 
-    public UserReqRes deleteUser(Integer userId) {
-        UserReqRes response = new UserReqRes();
+    public UserDTO deleteUser(Integer userId) {
+        UserDTO response = new UserDTO();
 
         try {
             Optional<Users> userOptional = usersRepo.findById(userId);
@@ -154,8 +154,8 @@ public class UsersService {
         return response;
     }
 
-    public UserReqRes updateUser(Integer userId, Users updateUser) {
-        UserReqRes response = new UserReqRes();
+    public UserDTO updateUser(Integer userId, Users updateUser) {
+        UserDTO response = new UserDTO();
 
         try {
             Optional<Users> userOptional = usersRepo.findById(userId);
@@ -182,8 +182,8 @@ public class UsersService {
         return response;
     }
 
-    public UserReqRes getMyInfo(String email) {
-        UserReqRes response = new UserReqRes();
+    public UserDTO getMyInfo(String email) {
+        UserDTO response = new UserDTO();
          try {
              Optional<Users> userOptional = usersRepo.findByEmail(email);
 
