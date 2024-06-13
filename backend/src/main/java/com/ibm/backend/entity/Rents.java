@@ -3,7 +3,6 @@ package com.ibm.backend.entity;
 import com.ibm.backend.enums.RentState;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
 

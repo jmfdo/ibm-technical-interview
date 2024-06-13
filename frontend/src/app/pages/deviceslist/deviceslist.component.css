@@ -49,8 +49,7 @@ table th {
   font-weight: bold;
 }
 
-.delete-button,
-.update-button {
+.delete-button{
   padding: 9px;
   margin: 0px 2px;
   font-size: 14px;
@@ -62,17 +61,8 @@ table th {
   transition: background-color 0.3s ease;
 }
 
-.update-button {
-  background-color: #007bff;
-}
-
 .delete-button:hover {
   background-color: #c82333;
-}
-
-.update-button:hover {
-  background-color: #012750;
-
 }
 
 .error-message {

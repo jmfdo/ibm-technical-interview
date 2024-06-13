@@ -88,7 +88,7 @@ public class RentsService {
                 rent.setDeviceId(addRentRequest.getDeviceId());
                 rent.setClientId(addRentRequest.getClientId());
                 rent.setUserId(addRentRequest.getUserId());
-                rent.setRentState(RentState.PENDING);
+                rent.setRentState(RentState.PENDIENTE);
                 rent.setRentDate(addRentRequest.getRentDate());
                 rent.setExpDate(addRentRequest.getExpDate());
                 device.setTimesRequested(device.getTimesRequested() + 1);

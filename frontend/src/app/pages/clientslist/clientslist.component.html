@@ -1,9 +1,9 @@
 <div class="container">
-  <h2>Management Page</h2>
+  <h2>Panel de Administración</h2>
   @if (errorMessage) {
     <p class="error-message">{{ errorMessage }}</p>
   }
-  <button routerLink="/register" class="reg-button">Add user</button>
+  <button routerLink="/register" class="reg-button">Agregar cliente</button>
   <table>
     <thead>
       <tr>
@@ -21,8 +21,7 @@
             <td>{{ client.name }}</td>
             <td>{{ client.timesRented }}</td>
             <td>
-              <button class="delete-button" >Delete</button>
-              <button class="update-button" >Update</button>
+              <button class="delete-button" >Eliminar</button>
             </td>
           </tr>
         

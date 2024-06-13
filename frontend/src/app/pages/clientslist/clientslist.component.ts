@@ -24,10 +24,10 @@ export class ClientslistComponent implements OnInit {
       const token: any = localStorage.getItem('token')
       const response = await this.clientService.getAllClients(token)
       
-      if (response && response.statusCode === 200 && response.users) {
+      if (response && response.statusCode === 200 && response.clients) {
         this.clients = response.clients
       } else {
-        this.showError('No users found')
+        this.showError('No se encontraron clientes')
       }
     } catch (error: any) {
       this.showError(error.message)

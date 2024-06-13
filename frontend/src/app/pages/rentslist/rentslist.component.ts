@@ -1,18 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { RentService } from '../../services/rent.service';
 
 @Component({
   selector: 'app-rentslist',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './rentslist.component.html',
   styleUrl: './rentslist.component.css'
 })
 export class RentslistComponent implements OnInit {
 
-  constructor (private readonly rentService: RentService, private readonly router: Router) {}
+  constructor (private readonly rentService: RentService, private readonly router: Router) {
+
+  }
+
+  states: any = {
+    PENDING: "PENDIENTE",
+    ACTIVE: "ACTIVO",
+    EXPIRED: "VENCIDO",
+    OVERDUE: "CON RETRASO"
+  }
 
   rents: any[] = []
   errorMessage = ''
@@ -20,6 +29,9 @@ export class RentslistComponent implements OnInit {
       this.loadRents()
   }
 
+  showState () {
+    
+  }
   async loadRents () {
     try {
       const token: any = localStorage.getItem('token')
@@ -28,7 +40,7 @@ export class RentslistComponent implements OnInit {
       if (response && response.statusCode === 200 && response.rents) {
         this.rents = response.rents
       } else {
-        this.showError('No users found')
+        this.showError('No se encontraron dispositivos alquilados')
       }
     } catch (error: any) {
       this.showError(error.message)

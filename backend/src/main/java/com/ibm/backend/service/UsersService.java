@@ -3,7 +3,6 @@ package com.ibm.backend.service;
 import com.ibm.backend.dto.CustomUserDTO;
 import com.ibm.backend.dto.UserDTO;
 import com.ibm.backend.entity.Users;
-import com.ibm.backend.enums.UserRole;
 import com.ibm.backend.repository.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -69,6 +68,7 @@ public class UsersService {
             response.setRefreshToken(refreshToken);
             response.setRole(user.getRole());
             response.setExpirationTime("24Hrs");
+            response.setId(user.getId());
             response.setMessage("Successfully logged in");
         } catch (Exception e) {
             response.setStatusCode(500);

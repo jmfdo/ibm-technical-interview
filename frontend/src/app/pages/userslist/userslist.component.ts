@@ -30,7 +30,7 @@ export class UserslistComponent implements OnInit {
       if (response && response.statusCode === 200 && response.users) {
         this.users = response.users
       } else {
-        this.showError('No users found')
+        this.showError('No se encontraron usuarios')
       }
     } catch (error: any) {
       this.showError(error.message)
@@ -38,7 +38,7 @@ export class UserslistComponent implements OnInit {
   }
 
   async deleteUser (userId: string) {
-    const confirmDelete = confirm('Are you sure you wanna delete this user?')
+    const confirmDelete = confirm('Estas seguro que quieres borrar este usuario?')
     if (confirmDelete) {
       try {
         const token: any = localStorage.getItem('token')
@@ -48,10 +48,6 @@ export class UserslistComponent implements OnInit {
         this.showError(error.message)
       }
     }
-  }
-
-  navigateToUpdate(userId: string) {
-    this.router.navigate(['/update', userId])
   }
 
   showError (message: string) {

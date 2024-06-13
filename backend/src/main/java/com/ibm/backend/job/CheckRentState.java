@@ -27,21 +27,21 @@ public class CheckRentState implements Job {
 
             switch (rent.getRentState()){
 
-                case PENDING:
+                case PENDIENTE:
                     if (rent.getRentDate().isEqual(today) || (rent.getRentDate().isBefore(today) && rent.getExpDate().isAfter(today))){
-                        rent.setRentState(RentState.ACTIVE);
+                        rent.setRentState(RentState.ACTIVO);
                     }
                     break;
-                case ACTIVE:
+                case ACTIVO:
                     if (rent.getExpDate().isEqual(today)){
-                        rent.setRentState(RentState.EXPIRED);
+                        rent.setRentState(RentState.VENCIDO);
                     }
                     break;
-                case EXPIRED:
+                case VENCIDO:
                     if (rent.getExpDate().isBefore(today)){
-                        rent.setRentState(RentState.OVERDUE);
+                        rent.setRentState(RentState.RETRASADO);
                     }
-                case OVERDUE:
+                case RETRASADO:
                     // Send email
                     break;
             }

@@ -2,12 +2,9 @@ package com.ibm.backend.controller;
 
 import com.ibm.backend.dto.CustomUserDTO;
 import com.ibm.backend.dto.UserDTO;
-import com.ibm.backend.entity.Users;
 import com.ibm.backend.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

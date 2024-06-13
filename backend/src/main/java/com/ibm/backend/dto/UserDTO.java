@@ -2,7 +2,6 @@ package com.ibm.backend.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.ibm.backend.entity.Users;
 import com.ibm.backend.enums.UserRole;
 import lombok.Data;
 
@@ -19,6 +18,7 @@ public class UserDTO {
     private String token;
     private String refreshToken;
     private String expirationTime;
+    private int id;
     private UserRole role;
     private List<CustomUserDTO> users;
 }

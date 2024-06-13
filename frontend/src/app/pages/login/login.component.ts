@@ -29,10 +29,10 @@ export class LoginComponent {
     try {
       const response = await this.userService.login(this.email, this.password)
       if (response.statusCode === 200) {
-        console.log(response);
         
         localStorage.setItem('token', response.token)
         localStorage.setItem('role', response.role)
+        localStorage.setItem('userId', response.id)
         this.router.navigate(['/rents'])
       } else {
         this.showError(response.message)

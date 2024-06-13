@@ -25,10 +25,10 @@ export class DeviceslistComponent implements OnInit {
       const token: any = localStorage.getItem('token')
       const response = await this.deviceService.getAllDevices(token)
       
-      if (response && response.statusCode === 200 && response.users) {
+      if (response && response.statusCode === 200 && response.devices) {
         this.devices = response.devices
       } else {
-        this.showError('No devices found')
+        this.showError('No se encontraron dispositivos')
       }
     } catch (error: any) {
       this.showError(error.message)

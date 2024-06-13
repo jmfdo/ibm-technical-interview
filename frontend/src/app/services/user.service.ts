@@ -104,6 +104,7 @@ export class UserService {
     if (typeof localStorage !== 'undefined') {
       localStorage.removeItem('token')
       localStorage.removeItem('role')
+      localStorage.removeItem('userId')
     }
   }
 

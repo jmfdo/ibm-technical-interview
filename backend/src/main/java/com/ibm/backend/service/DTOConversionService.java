@@ -38,6 +38,7 @@ public class DTOConversionService {
         dto.setName(device.getName());
         dto.setDeviceType(device.getDeviceType());
         dto.setAmount(device.getAmount());
+        dto.setTimesRequested(device.getTimesRequested());
         return dto;
     }
 
@@ -49,6 +50,7 @@ public class DTOConversionService {
         CustomClientDTO dto = new CustomClientDTO();
         dto.setId(client.getId());
         dto.setName(client.getName());
+        dto.setTimesRented(client.getTimesRented());
         return dto;
     }
 
