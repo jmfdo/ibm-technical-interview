@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Component
-public class CheckState implements Job {
+public class CheckRentState implements Job {
 
     @Autowired
     private RentsRepo rentsRepo;
@@ -45,9 +45,7 @@ public class CheckState implements Job {
                     // Send email
                     break;
             }
-            if (today.isEqual(rent.getExpDate().minusDays(1))){
-                // Send email
-            }
+
         }
     }
 }

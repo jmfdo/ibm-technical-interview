@@ -1,6 +1,6 @@
 package com.ibm.backend.config;
 
-import com.ibm.backend.job.CheckState;
+import com.ibm.backend.job.CheckRentState;
 import org.quartz.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ public class QuartzConfig {
 
     @Bean
     public JobDetail jobDetail () {
-        return JobBuilder.newJob(CheckState.class)
+        return JobBuilder.newJob(CheckRentState.class)
                 .withIdentity("checkRentStateJob")
                 .storeDurably()
                 .build();
