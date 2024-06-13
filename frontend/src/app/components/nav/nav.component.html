@@ -1,0 +1,16 @@
+<nav>
+  <ul>
+    @if (!isAuthenticated) {
+      <li>IBM Prueba Técnica</li>
+    }
+    @if (isAdmin) {
+      <li><a routerLink = "/users">Usuarios</a></li>
+    }
+    @if (isAuthenticated) {
+      <li><a routerLink = "/rents">Alquiler</a></li>
+      <li><a routerLink = "/rents">Clientes</a></li>
+      <li><a routerLink = "/rents">Dispositivos</a></li>
+      <li><a routerLink = ""(click)="logout()">Cerrar sesión</a></li>
+    }
+  </ul>
+</nav>

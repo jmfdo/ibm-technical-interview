@@ -1,0 +1,32 @@
+<div class="container">
+  <h2>Management Page</h2>
+  @if (errorMessage) {
+    <p class="error-message">{{ errorMessage }}</p>
+  }
+  <button routerLink="/register" class="reg-button">Add user</button>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre del cliente</th>
+        <th>No. de veces que alquiló</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (client of clients; track client.id) {
+        
+          <tr>
+            <td>{{ client.id }}</td>
+            <td>{{ client.name }}</td>
+            <td>{{ client.timesRented }}</td>
+            <td>
+              <button class="delete-button" >Delete</button>
+              <button class="update-button" >Update</button>
+            </td>
+          </tr>
+        
+      }
+    </tbody>
+  </table>
+</div>

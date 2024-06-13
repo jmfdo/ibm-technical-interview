@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>Management Page</h2>
+  @if (errorMessage) {
+    <p class="error-message">{{ errorMessage }}</p>
+  }
+  <button routerLink="/register" class="reg-button">Agregar usuario</button>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users; track user.id) {
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

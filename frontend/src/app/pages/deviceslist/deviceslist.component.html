@@ -1,0 +1,35 @@
+<div class="container">
+  <h2>Management Page</h2>
+  @if (errorMessage) {
+    <p class="error-message">{{ errorMessage }}</p>
+  }
+  <button routerLink="/register" class="reg-button">Add user</button>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre de dispositivo</th>
+        <th>Tipo de dispositivo</th>
+        <th>Cantidad</th>
+        <th>No. veces solicitado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (device of devices; track device.id) {
+          <tr>
+            <td>{{ device.id }}</td>
+            <td>{{ device.deviceName }}</td>
+            <td>{{ device.deviceType }}</td>
+            <td>{{ device.amount }}</td>
+            <td>{{ device.timesRequested }}</td>
+            <td>
+              <button class="delete-button" >Delete</button>
+              <button class="update-button" >Update</button>
+            </td>
+          </tr>
+        
+      }
+    </tbody>
+  </table>
+</div>

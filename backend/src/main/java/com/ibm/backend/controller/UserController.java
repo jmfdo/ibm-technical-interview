@@ -1,5 +1,6 @@
 package com.ibm.backend.controller;
 
+import com.ibm.backend.dto.CustomUserDTO;
 import com.ibm.backend.dto.UserDTO;
 import com.ibm.backend.entity.Users;
 import com.ibm.backend.service.UsersService;
@@ -16,12 +17,12 @@ public class UserController {
     private UsersService usersService;
 
     @PostMapping("/auth/register")
-    public ResponseEntity<UserDTO> register (@RequestBody UserDTO request) {
+    public ResponseEntity<UserDTO> register (@RequestBody CustomUserDTO request) {
         return ResponseEntity.ok(usersService.register(request));
     }
 
     @PostMapping("/auth/login")
-    public ResponseEntity<UserDTO> login (@RequestBody UserDTO request) {
+    public ResponseEntity<UserDTO> login (@RequestBody CustomUserDTO request) {
         return ResponseEntity.ok(usersService.login(request));
     }
 
@@ -33,24 +34,6 @@ public class UserController {
     @GetMapping("/admin/get-all-users")
     public ResponseEntity<UserDTO> getAllUsers(){
         return ResponseEntity.ok(usersService.getAllUsers());
-    }
-
-    @GetMapping("/admin/get-user/{userId}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Integer userId){
-        return ResponseEntity.ok(usersService.getUsersById(userId));
-    }
-
-    @PutMapping("/admin/update/{userId}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Integer userId, @RequestBody Users requestResponse){
-        return ResponseEntity.ok(usersService.updateUser(userId, requestResponse));
-    }
-
-    @GetMapping("/adminuser/get-profile")
-    public ResponseEntity<UserDTO> getProfile(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName();
-        UserDTO response = usersService.getMyInfo(email);
-        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
     @DeleteMapping("/admin/delete/{userId}")

@@ -1,0 +1,40 @@
+<div class="container">
+  <h2>Management Page</h2>
+  @if (errorMessage) {
+    <p class="error-message">{{ errorMessage }}</p>
+  }
+  <button routerLink="/register" class="reg-button">Add user</button>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre de dispositivo</th>
+        <th>Alquilado por</th>
+        <th>Alquilado a</th>
+        <th>Fecha de alquiler</th>
+        <th>Fecha de vencimiento</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (rent of rents; track rent.id) {
+        
+          <tr>
+            <td>{{ rent.id }}</td>
+            <td>{{ rent.deviceName }}</td>
+            <td>{{ rent.rentedBy }}</td>
+            <td>{{ rent.rentedTo }}</td>
+            <td>{{ rent.rentDate }}</td>
+            <td>{{ rent.expDate }}</td>
+            <td>{{ rent.rentState }}</td>
+            <td>
+              <button class="delete-button" >Delete</button>
+              <button class="update-button" >Update</button>
+            </td>
+          </tr>
+        
+      }
+    </tbody>
+  </table>
+</div>

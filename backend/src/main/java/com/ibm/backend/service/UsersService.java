@@ -1,5 +1,6 @@
 package com.ibm.backend.service;
 
+import com.ibm.backend.dto.CustomUserDTO;
 import com.ibm.backend.dto.UserDTO;
 import com.ibm.backend.entity.Users;
 import com.ibm.backend.enums.UserRole;
@@ -29,19 +30,21 @@ public class UsersService {
     @Autowired
      private PasswordEncoder passwordEncoder;
 
-    public UserDTO register(UserDTO registrationRequest){
+    @Autowired
+    private DTOConversionService dtoConversionService;
+
+    public UserDTO register(CustomUserDTO registrationRequest){
         UserDTO response = new UserDTO();
 
         try {
             Users user = new Users();
             user.setEmail(registrationRequest.getEmail());
-            user.setRole(UserRole.valueOf(registrationRequest.getRole()));
+            user.setRole(registrationRequest.getRole());
             user.setName(registrationRequest.getName());
             user.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
             Users usersResult = usersRepo.save(user);
 
             if(usersResult.getId()>0){
-                response.setUsers(usersResult);
                 response.setMessage("User saved successfully");
                 response.setStatusCode(200);
             }
@@ -53,7 +56,7 @@ public class UsersService {
         return response;
     }
 
-    public UserDTO login(UserDTO loginRequest) {
+    public UserDTO login(CustomUserDTO loginRequest) {
         UserDTO response = new UserDTO();
         try {
             authenticationManager
@@ -64,7 +67,7 @@ public class UsersService {
             response.setStatusCode(200);
             response.setToken(jwt);
             response.setRefreshToken(refreshToken);
-            response.setRole(String.valueOf(user.getRole()));
+            response.setRole(user.getRole());
             response.setExpirationTime("24Hrs");
             response.setMessage("Successfully logged in");
         } catch (Exception e) {
@@ -103,8 +106,9 @@ public class UsersService {
 
         try{
             List<Users> result = usersRepo.findAll();
+            List<CustomUserDTO> resultList = dtoConversionService.convertToUserDTOs(result);
             if (!result.isEmpty()) {
-                response.setUsersList(result);
+                response.setUsers(resultList);
                 response.setStatusCode(200);
                 response.setMessage("Successful");
             } else {
@@ -117,21 +121,6 @@ public class UsersService {
             response.setMessage("Error occurred: " + e.getMessage());
             return response;
         }
-    }
-
-    public UserDTO getUsersById(Integer id) {
-        UserDTO response = new UserDTO();
-
-        try {
-            Users userById = usersRepo.findById(id).orElseThrow(()-> new RuntimeException("User not found"));
-            response.setUsers(userById);
-            response.setStatusCode(200);
-            response.setMessage("User with id "+id+" found successfully");
-        } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error occurred: "+e.getMessage());
-        }
-        return response;
     }
 
     public UserDTO deleteUser(Integer userId) {
@@ -152,53 +141,5 @@ public class UsersService {
             response.setMessage("Error occurred while deleting user: " + e.getMessage());
         }
         return response;
-    }
-
-    public UserDTO updateUser(Integer userId, Users updateUser) {
-        UserDTO response = new UserDTO();
-
-        try {
-            Optional<Users> userOptional = usersRepo.findById(userId);
-
-            if (userOptional.isPresent()) {
-                Users existingUser = userOptional.get();
-                existingUser.setEmail(updateUser.getEmail());
-                existingUser.setName(updateUser.getName());
-                existingUser.setRole(updateUser.getRole());
-
-                if (updateUser.getPassword() != null && !updateUser.getPassword().isEmpty()) {
-                    existingUser.setPassword(passwordEncoder.encode(updateUser.getPassword()));
-                }
-
-                Users savedUser = usersRepo.save(existingUser);
-                response.setUsers(savedUser);
-                response.setStatusCode(200);
-                response.setMessage("User updated successfully");
-            }
-        } catch (Exception e){
-            response.setStatusCode(500);
-            response.setMessage("Error occurred while updating the user: "+e.getMessage());
-        }
-        return response;
-    }
-
-    public UserDTO getMyInfo(String email) {
-        UserDTO response = new UserDTO();
-         try {
-             Optional<Users> userOptional = usersRepo.findByEmail(email);
-
-             if (userOptional.isPresent()) {
-                 response.setUsers(userOptional.get());
-                 response.setStatusCode(200);
-                 response.setMessage("Successful");
-             } else {
-                 response.setStatusCode(404);
-                 response.setMessage("User not found for update");
-             }
-         } catch (Exception e) {
-             response.setStatusCode(500);
-             response.setMessage("Error occurred while getting the user info: "+e.getMessage());
-         }
-         return response;
     }
 }

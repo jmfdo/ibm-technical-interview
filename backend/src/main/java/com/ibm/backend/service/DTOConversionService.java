@@ -1,12 +1,10 @@
 package com.ibm.backend.service;
 
-import com.ibm.backend.dto.CustomClientDTO;
-import com.ibm.backend.dto.CustomDeviceDTO;
-import com.ibm.backend.dto.CustomRentDTO;
-import com.ibm.backend.dto.RentDTO;
+import com.ibm.backend.dto.*;
 import com.ibm.backend.entity.Clients;
 import com.ibm.backend.entity.Devices;
 import com.ibm.backend.entity.Rents;
+import com.ibm.backend.entity.Users;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,5 +54,18 @@ public class DTOConversionService {
 
     public List<CustomClientDTO> convertToClientDTOs(List<Clients> clients) {
         return clients.stream().map(this::convertToClientDTO).collect(Collectors.toList());
+    }
+
+    private CustomUserDTO convertToUserDTO(Users user) {
+        CustomUserDTO dto = new CustomUserDTO();
+        dto.setId(user.getId());
+        dto.setName(user.getName());
+        dto.setEmail(user.getEmail());
+        dto.setRole(user.getRole());
+        return dto;
+    }
+
+    public List<CustomUserDTO> convertToUserDTOs(List<Users> users) {
+        return users.stream().map(this::convertToUserDTO).collect(Collectors.toList());
     }
 }
