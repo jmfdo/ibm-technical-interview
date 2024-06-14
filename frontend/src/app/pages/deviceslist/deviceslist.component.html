@@ -3,7 +3,10 @@
   @if (errorMessage) {
     <p class="error-message">{{ errorMessage }}</p>
   }
-  <button routerLink="/register" class="reg-button">Agregar dispositivo</button>
+  <div class="button-group">
+    <button routerLink="/register" class="reg-button">Agregar dispositivo</button>
+    <button (click)="switchTable()" class="reg-button">Ordenar</button>
+  </div>
   <table>
     <thead>
       <tr>
@@ -12,20 +15,16 @@
         <th>Tipo de dispositivo</th>
         <th>Cantidad</th>
         <th>No. veces solicitado</th>
-        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      @for (device of devices; track device.id) {
+      @for (device of devicesData; track device.id) {
           <tr>
             <td>{{ device.id }}</td>
             <td>{{ device.name }}</td>
             <td>{{ device.deviceType }}</td>
             <td>{{ device.amount }}</td>
             <td>{{ device.timesRequested }}</td>
-            <td>
-              <button class="delete-button" >Eliminar</button>
-            </td>
           </tr>
         
       }

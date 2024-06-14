@@ -50,6 +50,7 @@ public class DTOConversionService {
         CustomClientDTO dto = new CustomClientDTO();
         dto.setId(client.getId());
         dto.setName(client.getName());
+        dto.setEmail(client.getEmail());
         dto.setTimesRented(client.getTimesRented());
         return dto;
     }

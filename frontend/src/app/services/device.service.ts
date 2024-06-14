@@ -21,4 +21,18 @@ export class DeviceService {
       throw error;
     }
   }
+
+  async addDevice(userData: any, token: string): Promise<any> {
+    
+    const url = `${this.BASE_URL}/adminuser/add-device`
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    })
+    try {
+      const response = await this.http.post<any>(url, userData, { headers }).toPromise()
+      return response
+    } catch (error) {
+      throw error
+    }
+  }
 }

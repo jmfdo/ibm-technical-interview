@@ -23,8 +23,4 @@ public class DeviceController {
         return ResponseEntity.ok(devicesService.addDevice(request));
     }
 
-    @DeleteMapping("/adminuser/delete-device/{deviceId}")
-    public ResponseEntity<DeviceDTO> deleteClient(@PathVariable Integer deviceId) {
-        return ResponseEntity.ok(devicesService.deleteDevice(deviceId));
-    }
 }

@@ -46,60 +46,6 @@ export class UserService {
     }
   }
 
-  async getYourProfile(token: string): Promise<any> {
-    const url = `${this.BASE_URL}/adminuser/get-profile`
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    })
-    try {
-      const response = await this.http.get<any>(url, {headers}).toPromise()
-      return response
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getUserById(userId: string, token: string): Promise<any> {
-    const url = `${this.BASE_URL}/admin/get-user/${userId}`
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    })
-    try {
-      const response = await this.http.get<any>(url, {headers}).toPromise()
-      return response
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async deleteUser(userId: string, token: string): Promise<any> {
-    const url = `${this.BASE_URL}/admin/delete/${userId}`
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    })
-    try {
-      const response = await this.http.get<any>(url, {headers}).toPromise()
-      return response
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async updateUser(userId:string, userData:any, token: string): Promise<any> {
-    const url = `${this.BASE_URL}/admin/update/${userId}`
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    })
-    try {
-      const response = await this.http.put<any>(url, userData, {headers}).toPromise()
-      return response
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  // Authentication Methods
-
   logOut(): void {
     if (typeof localStorage !== 'undefined') {
       localStorage.removeItem('token')

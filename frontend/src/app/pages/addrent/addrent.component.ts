@@ -67,15 +67,3 @@ export class AddrentComponent {
   }
 }
 
-export class RegisterComponent {
-
-
-  async handleSubmit() {
-
-
-
-  }
-
-
-}
-

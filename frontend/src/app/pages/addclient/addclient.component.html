@@ -1,0 +1,17 @@
+<div class="container">
+  @if (errorMessage) {
+    <p class="error-message">{{ errorMessage }}</p>
+  }
+  <h2>Registro</h2>
+  <form (submit)="handleSubmit()">
+    <div class="form-group">
+      <label>Id del cliente:</label>
+      <input type="text" name="id" [(ngModel)]="formData.id" required />
+    </div>
+    <div class="form-group">
+      <label>Nombre del cliente:</label>
+      <input type="text" name="name" [(ngModel)]="formData.name" required />
+    </div>
+    <button type="submit">Agregar alquiler</button>
+  </form>
+</div>

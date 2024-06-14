@@ -62,24 +62,4 @@ public class DevicesService {
         }
         return response;
     }
-
-    public DeviceDTO deleteDevice (Integer deviceId) {
-        DeviceDTO response = new DeviceDTO();
-
-        try {
-            Optional<Devices> deviceOptional = devicesRepo.findById(deviceId);
-            if (deviceOptional.isPresent()){
-                devicesRepo.deleteById(deviceId);
-                response.setStatusCode(200);
-                response.setMessage("Device deleted succesfully");
-            } else {
-                response.setStatusCode(404);
-                response.setMessage("Device not found for deletion");
-            }
-        } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error occurred while deleting device: "+e.getMessage());
-        }
-        return response;
-    }
 }

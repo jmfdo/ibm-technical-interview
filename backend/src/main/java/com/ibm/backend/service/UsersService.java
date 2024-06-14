@@ -122,24 +122,4 @@ public class UsersService {
             return response;
         }
     }
-
-    public UserDTO deleteUser(Integer userId) {
-        UserDTO response = new UserDTO();
-
-        try {
-            Optional<Users> userOptional = usersRepo.findById(userId);
-            if (userOptional.isPresent()) {
-                usersRepo.deleteById(userId);
-                response.setStatusCode(200);
-                response.setMessage("User deleted successfully");
-            } else {
-                response.setStatusCode(404);
-                response.setMessage("User not found for deletion");
-            }
-        } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error occurred while deleting user: " + e.getMessage());
-        }
-        return response;
-    }
 }

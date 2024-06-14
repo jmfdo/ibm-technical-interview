@@ -12,12 +12,27 @@ import { DeviceService } from '../../services/device.service';
 export class DeviceslistComponent implements OnInit {
   devices: any[] = []
   errorMessage = ''
+  devicesData: any[] = []
+  sorted = false
 
   constructor (private readonly deviceService: DeviceService, private readonly router: Router) {
 
   }
   ngOnInit(): void {
-      this.loadDevices()
+    this.loadDevices()
+  }
+
+  switchTable() {
+    this.sorted = !this.sorted;
+    this.refreshTableData();
+  }
+
+  refreshTableData() {
+    this.devicesData = this.sorted ? this.sortData([...this.devices]) : [...this.devices];
+  }
+
+  sortData(devices: any[]) {
+    return devices.sort((a, b) => b['timesRequested'] - a['timesRequested'])
   }
 
   async loadDevices () {
@@ -27,6 +42,7 @@ export class DeviceslistComponent implements OnInit {
       
       if (response && response.statusCode === 200 && response.devices) {
         this.devices = response.devices
+        this.devicesData = response.devices
       } else {
         this.showError('No se encontraron dispositivos')
       }

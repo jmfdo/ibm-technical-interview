@@ -16,26 +16,17 @@ public class Rents {
     @Column(name = "id", nullable = false, updatable = false)
     private Integer id;
 
-    @Column(nullable = false)
-    private int deviceId;
-
     @ManyToOne()
-    @JoinColumn(name = "rent_user", nullable = false)
+    @JoinColumn(name = "rent_user")
     Users users;
 
     @ManyToOne()
-    @JoinColumn(name = "rent_client", nullable = false)
+    @JoinColumn(name = "rent_client")
     Clients clients;
 
     @ManyToOne()
-    @JoinColumn(name = "rent_device", nullable = false)
+    @JoinColumn(name = "rent_device")
     Devices devices;
-
-    @Column(nullable = false)
-    private int clientId;
-
-    @Column(nullable = false)
-    private int userId;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

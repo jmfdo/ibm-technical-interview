@@ -1,0 +1,28 @@
+<div class="container">
+  @if (errorMessage) {
+    <p class="error-message">{{ errorMessage }}</p>
+  }
+  <h2>Registro</h2>
+  <form (submit)="handleSubmit()">
+    <div class="form-group">
+      <label>Nombre del dispositivo:</label>
+      <input type="text" name="name" [(ngModel)]="formData.name" required />
+    </div>
+    <div class="form-group">
+      <label>Rol:</label>
+      <select name="deviceType" [(ngModel)]="formData.deviceType" required>
+        <option value="">Seleccionar tipo</option>
+        <option value="SMARTPHONE">SMARTPHONE</option>
+        <option value="TABLET">TABLET</option>
+        <option value="VIDEOBEAM">VIDEOBEAM</option>
+        <option value="LAPTOP">LAPTOP</option>
+        <option value="OTHER">OTHER</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Cantidad:</label>
+      <input type="date" name="amount" [(ngModel)]="formData.amount" required />
+    </div>
+    <button type="submit">Agregar dispositivo</button>
+  </form>
+</div>

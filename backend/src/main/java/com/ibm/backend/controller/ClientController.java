@@ -22,9 +22,4 @@ public class ClientController {
     public ResponseEntity<ClientDTO> addClient(@RequestBody CustomClientDTO request) {
         return ResponseEntity.ok(clientsService.addClient(request));
     }
-
-    @DeleteMapping("/adminuser/delete-client/{clientId}")
-    public ResponseEntity<ClientDTO> deleteClient(@PathVariable Integer clientId) {
-        return ResponseEntity.ok(clientsService.deleteClient(clientId));
-    }
 }

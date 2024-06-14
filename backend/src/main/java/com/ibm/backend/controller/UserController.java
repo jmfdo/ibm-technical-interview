@@ -33,8 +33,4 @@ public class UserController {
         return ResponseEntity.ok(usersService.getAllUsers());
     }
 
-    @DeleteMapping("/admin/delete/{userId}")
-    public ResponseEntity<UserDTO> deleteUser(@PathVariable Integer userId) {
-        return ResponseEntity.ok(usersService.deleteUser(userId));
-    }
 }

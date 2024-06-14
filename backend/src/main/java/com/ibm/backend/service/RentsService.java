@@ -2,6 +2,7 @@ package com.ibm.backend.service;
 
 import com.ibm.backend.dto.CustomRentDTO;
 import com.ibm.backend.dto.RentDTO;
+import com.ibm.backend.dto.UserDTO;
 import com.ibm.backend.entity.Clients;
 import com.ibm.backend.entity.Devices;
 import com.ibm.backend.entity.Rents;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RentsService {
@@ -84,10 +86,10 @@ public class RentsService {
             } else if (expDate.isAfter(twelveDaysLaterRent)) {
                 response.setStatusCode(400);
                 response.setMessage("Expiration date only until 12 days");
+            } else if (device.getAmount() == 0) {
+                response.setStatusCode(400);
+                response.setMessage("Out of stock");
             } else {
-                rent.setDeviceId(addRentRequest.getDeviceId());
-                rent.setClientId(addRentRequest.getClientId());
-                rent.setUserId(addRentRequest.getUserId());
                 rent.setRentState(RentState.PENDIENTE);
                 rent.setRentDate(addRentRequest.getRentDate());
                 rent.setExpDate(addRentRequest.getExpDate());

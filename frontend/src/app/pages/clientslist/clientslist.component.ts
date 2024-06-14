@@ -12,11 +12,26 @@ import { ClientService } from '../../services/client.service';
 export class ClientslistComponent implements OnInit {
   clients: any[] = []
   errorMessage = ''
+  sorted = false
+  clientsData: any[] = []
 
   constructor (private readonly clientService: ClientService, private readonly router: Router) {}
 
   ngOnInit(): void {
-      this.loadClients()
+    this.loadClients()
+  }
+
+  switchTable() {
+    this.sorted = !this.sorted;
+    this.refreshTableData();
+  }
+
+  refreshTableData() {
+    this.clientsData = this.sorted ? this.sortData([...this.clients]) : [...this.clients];
+  }
+
+  sortData(clients: any[]) {
+    return clients.sort((a, b) => b['timesRented'] - a['timesRented'])
   }
 
   async loadClients() {
@@ -26,6 +41,7 @@ export class ClientslistComponent implements OnInit {
       
       if (response && response.statusCode === 200 && response.clients) {
         this.clients = response.clients
+        this.clientsData = response.clients
       } else {
         this.showError('No se encontraron clientes')
       }
