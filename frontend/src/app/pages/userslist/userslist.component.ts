@@ -37,19 +37,6 @@ export class UserslistComponent implements OnInit {
     }
   }
 
-  async deleteUser (userId: string) {
-    const confirmDelete = confirm('Estas seguro que quieres borrar este usuario?')
-    if (confirmDelete) {
-      try {
-        const token: any = localStorage.getItem('token')
-        await this.userService.deleteUser(userId, token)
-        this.loadUsers
-      } catch (error: any) {
-        this.showError(error.message)
-      }
-    }
-  }
-
   showError (message: string) {
     this.errorMessage = message
     setTimeout(() => {

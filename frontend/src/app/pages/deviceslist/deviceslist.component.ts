@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { DeviceService } from '../../services/device.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-deviceslist',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './deviceslist.component.html',
   styleUrl: './deviceslist.component.css'
 })
@@ -14,6 +15,7 @@ export class DeviceslistComponent implements OnInit {
   errorMessage = ''
   devicesData: any[] = []
   sorted = false
+  filtered = false;
 
   constructor (private readonly deviceService: DeviceService, private readonly router: Router) {
 
