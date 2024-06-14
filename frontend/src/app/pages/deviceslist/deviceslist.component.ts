@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { DeviceService } from '../../services/device.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-deviceslist',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink],
   templateUrl: './deviceslist.component.html',
   styleUrl: './deviceslist.component.css'
 })

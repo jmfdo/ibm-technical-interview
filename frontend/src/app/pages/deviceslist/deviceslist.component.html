@@ -23,7 +23,7 @@
             <td>{{ device.id }}</td>
             <td>{{ device.name }}</td>
             <td>{{ device.deviceType }}</td>
-            <td [ngClass]="device.amount === 0 ? 'danger' : ''">{{ device.amount }}</td>
+            <td class="{{device.amount === 0 ? 'danger' : ''}}">{{ device.amount }}</td>
             <td>{{ device.timesRequested }}</td>
           </tr>
         

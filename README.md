@@ -17,3 +17,14 @@ El sistema debe ser desarrollado para una plataforma de contenedores, con un fro
 4.	Crear en la tecnología solicitada el servicio Json Rest de Backend para la función préstamo de dispositivos con sus correspondientes validaciones.
 
 5.	Entrevista de sustentación de las decisiones tecnológicas tomadas
+
+## Requerimientos
+
+- Node.js v20.14.0
+- Java SE v17.0.11
+- PostgreSQL v16
+
+## Frameworks utilizados
+
+- Angular v18
+- SpringBoot v3.3.0
