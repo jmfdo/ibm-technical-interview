@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class DeviceService {
 
-  private BASE_URL = "http://localhost:1010";
+  private BASE_URL = "http://localhost:8080";
   constructor(private http: HttpClient) { }
 
   async getAllDevices (token: string) {

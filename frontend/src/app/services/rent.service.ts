@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class RentService {
 
-  private BASE_URL = "http://localhost:1010";
+  private BASE_URL = "http://localhost:8080";
   constructor(private http: HttpClient) { }
 
   async getAllRents (token: string) {

@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UserService {
 
-  private BASE_URL = "http://localhost:1010";
+  private BASE_URL = "http://localhost:8080";
   constructor(private http: HttpClient) { }
 
   async login(email: string, password: string): Promise<any> {
