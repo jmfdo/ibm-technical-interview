@@ -31,15 +31,15 @@ public class ClientsService {
             if (!result.isEmpty()) {
                 response.setClients(resultsList);
                 response.setStatusCode(200);
-                response.setMessage("Successful");
+                response.setMessage("Consulta realizada con éxito");
             } else {
                 response.setStatusCode(404);
-                response.setMessage("No clients found");
+                response.setMessage("No se encontraron clientes");
             }
             return response;
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error occurred: "+e.getMessage());
+            response.setMessage("Ha ocurrido un error: "+e.getMessage());
             return response;
         }
     }
@@ -55,7 +55,7 @@ public class ClientsService {
             Clients clientsResult = clientsRepo.save(client);
 
             if(clientsResult.getId()>0){
-                response.setMessage("Client saved successfully");
+                response.setMessage("Cliente guardado con éxito");
                 response.setStatusCode(200);
             }
         } catch (Exception e) {

@@ -44,7 +44,7 @@ public class UsersService {
             Users usersResult = usersRepo.save(user);
 
             if(usersResult.getId()>0){
-                response.setMessage("User saved successfully");
+                response.setMessage("Usuario registrado con éxito");
                 response.setStatusCode(200);
             }
 
@@ -69,7 +69,7 @@ public class UsersService {
             response.setRole(user.getRole());
             response.setExpirationTime("24Hrs");
             response.setId(user.getId());
-            response.setMessage("Successfully logged in");
+            response.setMessage("Ha iniciado sesión");
         } catch (Exception e) {
             response.setStatusCode(500);
             response.setError(e.getMessage());
@@ -90,7 +90,7 @@ public class UsersService {
                 response.setToken(jwt);
                 response.setRefreshToken(refreshTokenRequest.getToken());
                 response.setExpirationTime("24Hrs");
-                response.setMessage("Successfully refreshed token");
+                response.setMessage("Token actualizado existosamente");
             }
             response.setStatusCode(200);
             return response;
@@ -110,15 +110,15 @@ public class UsersService {
             if (!result.isEmpty()) {
                 response.setUsers(resultList);
                 response.setStatusCode(200);
-                response.setMessage("Successful");
+                response.setMessage("Usuarios obtenidos exitosamente");
             } else {
                 response.setStatusCode(404);
-                response.setMessage("No users found");
+                response.setMessage("No se encontraron usuarios");
             }
             return response;
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error occurred: " + e.getMessage());
+            response.setMessage("Ha ocurrido un error: " + e.getMessage());
             return response;
         }
     }

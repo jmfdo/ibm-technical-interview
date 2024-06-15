@@ -28,15 +28,15 @@ public class DevicesService {
             if (!result.isEmpty()) {
                 response.setDevices(resultList);
                 response.setStatusCode(200);
-                response.setMessage("Successful");
+                response.setMessage("Consulta realizada con éxito");
             } else {
                 response.setStatusCode(404);
-                response.setMessage("No devices found");
+                response.setMessage("No se encontraron dispositivos");
             }
             return response;
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error occurred: "+e.getMessage());
+            response.setMessage("Ha ocurrido un error: "+e.getMessage());
             return response;
         }
     }
@@ -53,7 +53,7 @@ public class DevicesService {
 
 
             if(devicesResult.getId()>0){
-                response.setMessage("Device saved successfully");
+                response.setMessage("Dispositivo guardado con éxito");
                 response.setStatusCode(200);
             }
         } catch (Exception e) {

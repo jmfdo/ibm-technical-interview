@@ -49,15 +49,15 @@ public class RentsService {
             if (!result.isEmpty()) {
                 response.setRents(resultList);
                 response.setStatusCode(200);
-                response.setMessage("Successful");
+                response.setMessage("Consulta realizada con éxito");
             } else {
                 response.setStatusCode(404);
-                response.setMessage("No rents found");
+                response.setMessage("No se encontraron alquileres");
             }
             return response;
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error occurred: " + e.getMessage());
+            response.setMessage("Ha ocurrido un error: " + e.getMessage());
             return response;
         }
     }
@@ -79,16 +79,16 @@ public class RentsService {
 
             if (rentDate.isBefore(today)) {
                 response.setStatusCode(400);
-                response.setMessage("Date cant be before today");
+                response.setMessage("La fecha no puede ser anterior a hoy");
             } else if (rentDate.isBefore(twoDaysLater)) {
                 response.setStatusCode(400);
-                response.setMessage("Date cant be before two days");
+                response.setMessage("La fecha solo puede ser 2 dias despues");
             } else if (expDate.isAfter(twelveDaysLaterRent)) {
                 response.setStatusCode(400);
-                response.setMessage("Expiration date only until 12 days");
+                response.setMessage("Fecha limite de 12 dias");
             } else if (device.getAmount() == 0) {
                 response.setStatusCode(400);
-                response.setMessage("Out of stock");
+                response.setMessage("Sin stock");
             } else {
                 rent.setRentState(RentState.PENDIENTE);
                 rent.setRentDate(addRentRequest.getRentDate());
@@ -107,7 +107,7 @@ public class RentsService {
             Rents rentsResult = rentsRepo.save(rent);
 
             if (rentsResult.getId() > 0) {
-                response.setMessage("Rent saved successfully");
+                response.setMessage("Alquiler guardado con éxito");
                 response.setStatusCode(200);
             }
 
